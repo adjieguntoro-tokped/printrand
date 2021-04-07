@@ -24,48 +24,68 @@ const HomeView = () => {
 
   const renderGenerate = () => (
     <div>
-      <button onClick={handleGenerate}>Generate</button>
+      <button style={{
+        padding: '8px 12px',
+        margin: '8px',
+      }} onClick={handleGenerate}>Generate</button>
     </div>
   );
 
   if(loading) {
-    return <div>Please wait ...</div>;
+    return (
+    <div style={{
+      padding: '8px 12px',
+      margin: '8px',
+    }}>
+      Waiting for magic!!
+    </div>
+    );
   }
 
   if(!data){ 
     return renderGenerate();
   }
 
-  console.log('data', data);
-
   const { alphabetical, alphanumeric, real, integer, file } = data;
 
 
   const renderLink = () => data ? (
-    <div>
+    <span style={{
+      padding: '8px 2px',
+      margin: '12px 8px',
+    }}>
       Link:
       <a href={file} target="_blank">download here!</a>
-    </div>
+    </span>
   ) : null;
 
   const renderReport = () => (
-    <div>
-      <button onClick={handleShowReport}>Report</button>
+    <div style={{
+      marginTop: '8px'
+    }}>
+      <button style={{
+        padding: '8px 12px',
+        margin: '8px',
+      }} onClick={handleShowReport}>{showReport ? 'Close' : 'Open'} Report</button>
       <div>
         {showReport ? (
-          <ul>
-          <li>Alphabetical string: {alphabetical}</li>
-          <li>Real numbers: {real}</li>
-          <li>Integers: {integer}</li>
-          <li>Alphanumeric: {alphanumeric}</li>
-        </ul>
+          <ul style={{
+            listStyle: 'none',
+            textAlign: 'left',
+            paddingLeft: '8px',
+          }}>
+            <li>Alphabetical string: {alphabetical}</li>
+            <li>Real numbers: {real}</li>
+            <li>Integers: {integer}</li>
+            <li>Alphanumeric: {alphanumeric}</li>
+          </ul>
         ) : null}
       </div>
     </div>
   );
 
   return (
-    <div>
+    <div className="container">
       {renderGenerate()}
       {renderLink()}
       {renderReport()}
